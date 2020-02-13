@@ -4,18 +4,7 @@ import TodoForm from './components/TodoForm';
 import './components/Todo.css';
 
 
-const bananas = [
-  {
-    name: 'Organize Garage',
-    id: 1528817077286,
-    completed: false
-  },
-  {
-    name: 'Bake Cookies',
-    id: 1528817084358,
-    completed: false
-  }
-];
+const bananas = [];
 
 class App extends React.Component {
   constructor() {
@@ -45,8 +34,13 @@ class App extends React.Component {
     });
   };
   
-  clearCompleted = () =>
+  clearCompleted = (e) => {
     console.log(bananas);
+    e.preventDefault();
+      this.setState({
+        grocList: this.state.grocList.filter(item => !item.completed)
+      })
+  }
 
 
   addNewItem = itemText => {
@@ -73,10 +67,9 @@ class App extends React.Component {
           toggleItem={this.toggleItem}
         />
         <button onClick={this.clearCompleted}>
-          Clear Purchased
+          Clear Completed
         </button>
       </div>
-      
     );
   }
 }
